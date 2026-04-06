@@ -20,6 +20,11 @@ public class JoyaVO {
         this.stock = stock;
     }
 
+    @Override
+    public String toString() {
+        return nombre;
+    }
+
     public int getId() {
         return id;
     }

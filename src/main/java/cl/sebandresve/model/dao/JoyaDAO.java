@@ -54,4 +54,38 @@ public class JoyaDAO {
 
         return lista;
     }
+
+    public void actualizar(JoyaVO joya) {
+        String sql = "UPDATE joya SET nombre=?, material=?, peso=?, precio=?, stock=? WHERE id=?";
+
+        try (Connection conn = ConexionDB.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, joya.getNombre());
+            ps.setString(2, joya.getMaterial());
+            ps.setDouble(3, joya.getPeso());
+            ps.setDouble(4, joya.getPrecio());
+            ps.setInt(5, joya.getStock());
+            ps.setInt(6, joya.getId());
+
+            ps.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void eliminar(int id) {
+        String sql = "DELETE FROM joya WHERE id=?";
+
+        try (Connection conn = ConexionDB.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, id);
+            ps.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

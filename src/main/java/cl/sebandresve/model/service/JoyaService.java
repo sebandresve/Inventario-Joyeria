@@ -25,4 +25,15 @@ public class JoyaService {
     public List<JoyaVO> obtenerJoyas() {
         return dao.listar();
     }
+
+    public void actualizarJoya(JoyaVO joya) {
+        if (joya.getId() <= 0) {
+            throw new IllegalArgumentException("ID inválido");
+        }
+        dao.actualizar(joya);
+    }
+
+    public void eliminarJoya(int id) {
+        dao.eliminar(id);
+    }
 }
