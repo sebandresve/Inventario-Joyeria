@@ -79,4 +79,106 @@ public class VentaDAO {
 
         return lista;
     }
+
+    public double obtenerTotalVentas() {
+        String sql = """
+        SELECT SUM(v.cantidad * j.precio)
+        FROM venta v
+        JOIN joya j ON v.joya_id = j.id
+    """;
+
+        try (Connection conn = ConexionDB.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+
+            if (rs.next()) {
+                return rs.getDouble(1);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return 0;
+    }
+
+    public List<Object[]> topJoyas() {
+
+        List<Object[]> lista = new ArrayList<>();
+
+        String sql = """
+        SELECT j.nombre, SUM(v.cantidad) as total
+        FROM venta v
+        JOIN joya j ON v.joya_id = j.id
+        GROUP BY j.nombre
+        ORDER BY total DESC
+        LIMIT 10
+    """;
+
+        try (Connection conn = ConexionDB.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+
+            while (rs.next()) {
+                lista.add(new Object[]{
+                        rs.getString(1),
+                        rs.getInt(2)
+                });
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return lista;
+    }
+
+    public List<Object[]> topClientes() {
+
+        List<Object[]> lista = new ArrayList<>();
+
+        String sql = """
+        SELECT c.nombre, COUNT(v.id) as total
+        FROM venta v
+        JOIN cliente c ON v.cliente_id = c.id
+        GROUP BY c.nombre
+        ORDER BY total DESC
+        LIMIT 10
+    """;
+
+        try (Connection conn = ConexionDB.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+
+            while (rs.next()) {
+                lista.add(new Object[]{
+                        rs.getString(1),
+                        rs.getInt(2)
+                });
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return lista;
+    }
+
+    public int obtenerCantidadVentas() {
+        String sql = "SELECT SUM(cantidad) FROM venta";
+
+        try (Connection conn = ConexionDB.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return 0;
+    }
 }

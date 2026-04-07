@@ -7,6 +7,7 @@ public class MainView extends JFrame {
 
     public JMenuItem menuInventario;
     public JMenuItem menuVentas;
+    public JMenuItem menuReportes;
 
     public MainView() {
         setTitle("Sistema Joyería");
@@ -21,9 +22,11 @@ public class MainView extends JFrame {
 
         menuInventario = new JMenuItem("Inventario");
         menuVentas = new JMenuItem("Ventas");
+        menuReportes = new JMenuItem("Reporte de Ventas");
 
         menu.add(menuInventario);
         menu.add(menuVentas);
+        menu.add(menuReportes);
 
         menuBar.add(menu);
         setJMenuBar(menuBar);
