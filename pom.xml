@@ -32,7 +32,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>com.tu.paquete.Main</mainClass>
+                            <mainClass>cl.sebandresve.Main</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
@@ -48,7 +48,7 @@
                     </descriptorRefs>
                     <archive>
                         <manifest>
-                            <mainClass>com.tu.paquete.Main</mainClass>
+                            <mainClass>cl.sebandresve.Main</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
