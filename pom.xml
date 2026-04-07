@@ -23,7 +23,7 @@
     </dependencies>
 
     <build>
-        <finalName>JoyeríaInventario</finalName>
+        <finalName>JoyeriaInventario</finalName>
 
         <plugins>
 
