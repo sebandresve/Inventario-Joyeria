@@ -6,26 +6,23 @@ import java.awt.*;
 
 public class VentaView extends JFrame {
 
-    // FORM
     public JComboBox comboCliente;
     public JComboBox comboJoya;
     public JTextField txtCantidad;
     public JButton btnVender;
 
-    // FILTROS
     public JComboBox comboFiltroCliente;
     public JTextField txtFechaFiltro;
     public JButton btnFiltrar;
 
-    // TABLA
     public JTable tablaVentas;
 
     public VentaView() {
         setTitle("Ventas");
         setSize(800, 500);
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setLayout(new BorderLayout());
 
-        // ================= FORMULARIO =================
         JPanel panelForm = new JPanel(new GridLayout(2, 4));
 
         comboCliente = new JComboBox();
@@ -45,14 +42,12 @@ public class VentaView extends JFrame {
 
         add(panelForm, BorderLayout.NORTH);
 
-        // ================= TABLA =================
         tablaVentas = new JTable(new DefaultTableModel(
                 new Object[]{"Cliente", "Joya", "Cantidad", "Fecha"}, 0
         ));
 
         add(new JScrollPane(tablaVentas), BorderLayout.CENTER);
 
-        // ================= FILTROS =================
         JPanel panelFiltro = new JPanel();
 
         comboFiltroCliente = new JComboBox();

@@ -23,16 +23,12 @@ public class JoyaController {
     private void init() {
         cargarTabla();
 
-        // AGREGAR
         view.btnAgregar.addActionListener(e -> agregar());
 
-        // ACTUALIZAR
         view.btnActualizar.addActionListener(e -> actualizar());
 
-        // ELIMINAR
         view.btnEliminar.addActionListener(e -> eliminar());
 
-        // CLICK EN TABLA
         view.tabla.getSelectionModel().addListSelectionListener(e -> seleccionarFila());
     }
 
@@ -114,7 +110,7 @@ public class JoyaController {
         view.txtStock.setText("");
     }
 
-    private void cargarTabla() {
+    public void cargarTabla() {
         DefaultTableModel model = (DefaultTableModel) view.tabla.getModel();
         model.setRowCount(0);
 

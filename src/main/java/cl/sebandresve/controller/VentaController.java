@@ -20,16 +20,16 @@ public class VentaController {
     private JoyaDAO joyaDAO = new JoyaDAO();
     private VentaService service = new VentaService();
     private VentaDAO ventaDAO = new VentaDAO();
+    private JoyaController joyaController;
 
-    public VentaController(VentaView view) {
+    public VentaController(VentaView view, JoyaController joyaController) {
         this.view = view;
+        this.joyaController = joyaController;
 
         cargarCombos();
-
-        cargarTabla(null, null); // 👈 carga inicial
+        cargarTabla(null, null);
 
         view.btnVender.addActionListener(e -> vender());
-
         view.btnFiltrar.addActionListener(e -> filtrar());
     }
 
@@ -37,7 +37,7 @@ public class VentaController {
         List<ClienteVO> clientes = clienteDAO.listar();
         for (ClienteVO c : clientes) {
             view.comboCliente.addItem(c);
-            view.comboFiltroCliente.addItem(c.getNombre()); // 👈 filtro
+            view.comboFiltroCliente.addItem(c.getNombre());
         }
 
         List<JoyaVO> joyas = joyaDAO.listar();
@@ -56,6 +56,10 @@ public class VentaController {
             VentaVO venta = new VentaVO(cliente.getId(), joya.getId(), cantidad);
 
             service.realizarVenta(venta);
+
+            if (joyaController != null) {
+                joyaController.cargarTabla();
+            }
 
             JOptionPane.showMessageDialog(null, "Venta realizada");
 

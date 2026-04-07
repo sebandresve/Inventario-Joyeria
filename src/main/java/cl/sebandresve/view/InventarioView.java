@@ -21,16 +21,14 @@ public class InventarioView extends JFrame {
     public InventarioView() {
         setTitle("Inventario de Joyas");
         setSize(800, 500);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setLayout(new BorderLayout());
 
-        // TABLA
         tabla = new JTable(new DefaultTableModel(
                 new Object[]{"ID", "Nombre", "Material", "Peso", "Precio", "Stock"}, 0
         ));
         add(new JScrollPane(tabla), BorderLayout.CENTER);
 
-        // FORMULARIO
         JPanel panelForm = new JPanel(new GridLayout(2, 5));
 
         txtNombre = new JTextField();
@@ -53,7 +51,6 @@ public class InventarioView extends JFrame {
 
         add(panelForm, BorderLayout.NORTH);
 
-        // BOTONES
         JPanel panelBotones = new JPanel();
 
         btnAgregar = new JButton("Agregar");

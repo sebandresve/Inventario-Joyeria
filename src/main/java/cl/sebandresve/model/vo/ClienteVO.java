@@ -20,6 +20,6 @@ public class ClienteVO {
 
     @Override
     public String toString() {
-        return nombre; // IMPORTANTE para JComboBox
+        return nombre;
     }
 }

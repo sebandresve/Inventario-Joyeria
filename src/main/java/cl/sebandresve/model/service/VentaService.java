@@ -16,9 +16,8 @@ public class VentaService {
 
         try (Connection conn = ConexionDB.getConnection()) {
 
-            conn.setAutoCommit(false); // 💥 TRANSACCIÓN
+            conn.setAutoCommit(false);
 
-            // 1. Obtener stock actual
             String sqlStock = "SELECT stock FROM joya WHERE id=?";
             PreparedStatement psStock = conn.prepareStatement(sqlStock);
             psStock.setInt(1, venta.getJoyaId());
@@ -32,17 +31,15 @@ public class VentaService {
                     throw new RuntimeException("Stock insuficiente");
                 }
 
-                // 2. Descontar stock
                 String updateStock = "UPDATE joya SET stock = stock - ? WHERE id=?";
                 PreparedStatement psUpdate = conn.prepareStatement(updateStock);
                 psUpdate.setInt(1, venta.getCantidad());
                 psUpdate.setInt(2, venta.getJoyaId());
                 psUpdate.executeUpdate();
 
-                // 3. Registrar venta
                 ventaDAO.registrar(venta);
 
-                conn.commit(); // ✅ TODO OK
+                conn.commit();
 
             } else {
                 throw new RuntimeException("Joya no encontrada");
